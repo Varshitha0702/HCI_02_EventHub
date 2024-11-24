@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Hub - Feedback</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            background-color: #f5f5f5;
+        }
+        a {
+            text-decoration: none;
+            margin-right: 70px;
+            color: black;
+        }
+        a:hover {
+            color: #edebf1;
+        }
+        .first {
+            align-content: center;
+            text-align: right;
+            align-content: space-evenly;
+            background-color: #C5AAE9;
+            padding: 10px;
+            height: 50px;
+            box-shadow: 0px 0px 10px rgb(47, 45, 45);
+        }
+        .f1 {
+            float: left;
+            align-content: center;
+            display: flex;
+        }
+        .second {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+        }
+        button {
+            font-family: 'Poppins', sans-serif;
+            border-radius: 20px;
+            padding: 5px 15px;
+            box-shadow: 0px 0px 10px rgb(47, 45, 45);
+        }
+        .first button {
+            background-color: white;
+            color: #e9aae5;
+            border: none;
+        }
+        .second button {
+            text-align: center;
+            background-color: #C5AAE9;
+            color: black;
+            border: none;
+        }
+        .feedback-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 50px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgb(47, 45, 45);
+            margin-top: 50px;
+        }
+        .feedback-container h1 {
+            margin-bottom: 20px;
+            color: #C5AAE9;
+        }
+        .feedback-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .feedback-form input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .feedback-form button {
+            background-color: #C5AAE9;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .fourth {
+            background-color: #79777a2d;
+            padding: 100px ;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            font-weight: 400;
+        }
+        .f2,.f3,.f4,.f5 {
+            flex: 1;
+            flex: 1;
+            padding: 10px;
+        }
+        .fourth h3 {
+            color:indigo;   
+        }
+        a {
+            text-decoration: none;
+        }
+        .fourth a:hover {
+            color: #C5AAE9;
+        }
+        .ft1 {
+            width: 250px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+    </style>
+</head>
+<body>
+    <br>
+    <div class="first">
+        <div class="f1">
+            <a href="index.html" style="margin-right: 30px"><i class="fa-solid fa-angle-left"></i></a>
+            <img src="https://1drv.ms/i/c/87289e1638bbb64a/IQRNQX0o26n_SK67FxFDLx6NAT8X8dVnBk7HEibMWdmg13Y?width=1024" alt="logo" width="40" height="40">
+        </div>
+        <a href="support.html">Support</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="about.html">About Us</a>
+        <a href="feedback.html" style="color:white">Feedback</a>
+        <a href="login.html"><button type="button">login</button></a>
+    </div>
+    <div class="feedback-container">
+        <h1>Share Your Thoughts!</h1>
+        <p>We value your feedback and would love to hear from you.</p>
+        <div class="feedback-form">
+            <input type="text" id="name" placeholder="Name" required>
+            <input type="email" id="email" placeholder="Email" required>
+            <textarea id="feedback" placeholder="Your Feedback" required></textarea>
+            <button type="button" onclick="submitFeedback()">Submit Feedback</button>
+        </div>
+
+        <div id="thankYouMessage" style="display:none; text-align:center; font-size: 20px; color: green;">
+            <p>Thank you for your feedback!</p>
+        </div>
+    </div><br><br>
+    <a href="index.html" style="margin-left: 100px;margin-right: 0px;color: indigo;">Home -> </a>
+        <a href="feedback.html" style="color: indigo;" >Feedback | Event Hub</a> 
+        <br> <br>
+    <div class="fourth">
+        <div class="ft1">
+            <img src="https://1drv.ms/i/c/87289e1638bbb64a/IQRNQX0o26n_SK67FxFDLx6NAT8X8dVnBk7HEibMWdmg13Y?width=1024" alt="logo" width="40" height="40">
+            <h2>Event Hub</h2>
+        </div>
+        <div class="ft2">
+            <h3>EVENT HUB ECOSYSTEM</h3>
+            <p>Event Calendar <br> Event Manager <br> Event Registration <br> Event Reminders <br> Analytics & Reporting </p>
+        </div>
+        <div class="ft3">
+            <h3>Features</h3>
+            <p>Customizable Calendars <br> Event Notifications <br> Recurring Events <br> Social Media Sharing <br> Attendee Management </p>
+        </div>
+        <div class="ft4">
+            <h3>Resources</h3>
+            <p>User Guides <br> Articles <br> Webinars <br> How-To Videos <br> Case Studies </p>
+        </div>
+        <div class="ft5">
+            <h3>About Event Hub</h3>
+            <p>Our Mission <br> Our Team <br> Careers <br> Partnerships <br> Press & Media</p>
+        </div>
+    </div>
+
+    <p align="center" style="font-weight: 300;">Privacy | Do Not Sell My Personal Information | Terms of Service | Acceptable Use Policy | Cookie Policy </p>
+    <p align="center" style="background-color:rgb(198, 197, 197);color:darkslateblue;font-size: small;">Copyright © 2024 Event Hub. All rights reserved. All trademarks are the property of their respective owners.</p>
+
+    <script>
+        function submitFeedback() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const feedback = document.getElementById('feedback').value;
+
+            console.log('Feedback submitted:', { name, email, feedback });
+
+            document.getElementById('thankYouMessage').style.display = 'block';
+
+            document.getElementById('name').value = '';
+            document.getElementById('email').value = '';
+            document.getElementById('feedback').value = '';
+        }
+    </script>
+</body>
+</html>

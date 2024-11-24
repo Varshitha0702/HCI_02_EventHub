@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Year | Event Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body{
+            position: fixed;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+        }
+        a{
+            text-decoration: none;
+        }
+        .top
+        {
+            display: flex;
+            align-content: space-evenly;
+            font-size:xx-large;
+            align-items: center;
+        }
+        .middle
+        {
+            display: flex;
+            align-items: flex-start;
+        }
+       .icon {
+            position: absolute;
+            left: 200px;
+            top: 7%; 
+            transform: translateY(-50%); 
+        }
+        .top input[type="text"] {
+            width: 20%;
+            padding: 10px 10px 10px 35px;
+            border-radius: 20px;
+            background-color: #97878712;
+            border-color: white;
+        }
+        .vertical{
+            flex-direction: column;
+            font-size: xx-large;
+            display: flex;
+            height: 580px;
+            width: 70px;
+            padding: 20px;
+            justify-content: space-between;
+        }
+       .mid
+        {       
+            background-color: #E9BFD9;
+            height: 100px;
+            width: 1400px;
+            align-items: center;
+            border: 1px solid white;
+            box-shadow: 0px 0px 10px 4px rgba(75, 75, 75, 0.3);
+        }
+        .mid1{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100px;
+        }
+        .mid1 button {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            border: none;
+            background-color: #E9BFD9;
+        }
+        .calendar-year {
+            font-family: 'Poppins', sans-serif;
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 3px;
+            width: 1400px;
+            height: 400px;
+        }
+        .calendar-month {
+            overflow: hidden;
+            background-color: white;
+        }
+        .month-header {
+            cursor: pointer;
+            font-size: small;
+            color: black;
+            text-align: center;
+            padding: 10px;
+            font-weight:500;
+        }
+        .days-of-week, .days {
+            display: grid;
+            grid-template-columns: repeat(7, 31px);
+            text-align: center;
+        }
+        .days-of-week div {
+            background-color: white;
+            padding: 2px 8px;
+            font-size: x-small;
+            font-weight:100;
+
+        }
+        .days div {
+            padding: 3px 0;
+        }
+        .vertical :hover{
+                color: black;
+                transform:scale(1.05) ;
+            }
+        .today {
+            background-color: #C5AAE9;
+            color: black;
+            font-weight: bold;
+            border-radius: 60%;
+        }
+        .year-select {
+            background-color: #E9BFD9;
+            border-color: #E9BFD9;
+            margin-right: 100px;
+            margin-left: 100px;
+            font-size: 30px;
+            font-weight: bolder;
+        }
+        .year{
+            font-size: x-small;
+            height: 290px;
+            margin-top: 30px;
+            background-color: white;
+            font-weight:500;
+        }
+        .highlight {
+    background-color: #E9BFD9;
+    border-radius: 60%;
+    font-weight: bold;
+}
+    </style>
+</head>
+<body>
+  <div class="top">
+        <img style="margin: 30px;margin-left: 20px;margin-right: 40px;" src="logo.png" alt="logo" width="40" height="40">
+        <a href="month.html"><i class="fa-solid fa-house" style="margin-right: 50px;color: black;"></i></a>
+        <span class="icon"><i class="fa-solid fa-magnifying-glass"></i></span> 
+        <input type="text" placeholder="     Search Event/Date/Month" style="margin-right: 750px;">
+        Hello John,
+    </div>
+    <div class="middle">
+    <div class="vertical" >
+        <i class="fa-solid fa-rotate-right" id="refreshIcon" style="cursor: pointer;color: black;"></i> 
+        <a href="days.html"> <i class="fa-solid fa-calendar" style="color: black;"></i></a>
+        <a href="settings_year.html"><i class="fa-solid fa-gear" style="color: black;"></i></a>
+        <a href="help_year.html"><i class="fa-solid fa-question" style="color: black;"></i></a>
+        <a href="profile_year.html"><i class="fa-solid fa-circle-user" style="color: black;"></i></a>
+    </div>
+    <div class="mid">
+        <div class="mid1">
+            <button onclick="previousYear()" style="font-size: large; color: black;margin-left: 20px;margin-right: 20px;"><i class="fa-solid fa-chevron-left"></i> <span id="prev"></span> </button>
+            <select id="year" class="year-select"></select>
+            <button onclick="nextYear()" style="font-size: large; color: black;margin-right: 20px;"><span id="next"></span>  <i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+    <div class="year">
+        <div class="calendar-year" id="calendar-year"></div>
+    </div>
+    </div>
+    </div>
+
+    <script>
+        const yearSelect = document.getElementById("year");
+        const calendarYearContainer = document.getElementById("calendar-year");
+    
+        const today = new Date();
+        const currentMonth = today.getMonth();
+        const currentYear = today.getFullYear();
+            for (let year = currentYear - 10; year <= currentYear + 10; year++) {
+            const option = document.createElement("option");
+            option.value = year;
+            option.text = year;
+            if (year === currentYear) option.selected = true;
+            yearSelect.appendChild(option);
+        }
+        function previousYear() 
+        {
+            const selectedYear = parseInt(yearSelect.value);
+            yearSelect.value = selectedYear - 1;
+            renderYearCalendar(selectedYear - 1);
+        }
+        function nextYear() 
+        {
+            const selectedYear = parseInt(yearSelect.value);
+            yearSelect.value = selectedYear + 1;
+            renderYearCalendar(selectedYear + 1);
+        }
+        function openCalendar() {
+      const calendar = document.getElementById('calendar');
+      calendar.style.visibility = calendar.style.visibility === 'hidden' ? 'visible' : 'hidden';
+    }
+    const highlightedDates = [
+    { year: 2024, month: 0, day: 19 }, 
+    { year: 2024, month: 1, day: 7 }, 
+    { year: 2024, month: 1, day: 29 },
+    { year: 2024, month: 1, day: 19 }, 
+    { year: 2024, month: 9, day: 31 }, 
+    { year: 2024, month: 0, day: 26 }, 
+    { year: 2024, month: 7, day: 15 }, 
+    { year: 2024, month: 4, day: 5 }, 
+    { year: 2024, month: 2, day: 25 }, 
+    { year: 2024, month: 3, day: 17 }, 
+    { year: 2024, month: 8, day: 7 }, 
+    { year: 2024, month: 11, day: 24 }, 
+];
+
+        function renderYearCalendar(year) {
+            calendarYearContainer.innerHTML = "";
+            const monthNames = ["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE","JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"];
+            for (let month = 0; month < 12; month++) {
+                const monthDiv = document.createElement("div");
+                monthDiv.classList.add("calendar-month");
+                const headerDiv = document.createElement("div");
+                headerDiv.classList.add("month-header");
+                headerDiv.innerText = monthNames[month];
+                headerDiv.addEventListener('click', function() {
+            const monthName = monthNames[month].toLowerCase();  // Convert month name to lowercase
+            window.location.href = `month.html?month=${monthName}`;  // Navigate to a page like january.html, february.html
+        });
+
+                monthDiv.appendChild(headerDiv);
+                const daysOfWeekDiv = document.createElement("div");
+                daysOfWeekDiv.classList.add("days-of-week");
+                ["SUN","MON", "TUE", "WED", "THU", "FRI", "SAT"].forEach(day => {
+                    const dayDiv = document.createElement("div");
+                    dayDiv.innerText = day;
+                    daysOfWeekDiv.appendChild(dayDiv);
+                });
+                monthDiv.appendChild(daysOfWeekDiv);
+    
+                const daysDiv = document.createElement("div");
+                daysDiv.classList.add("days");
+    
+                const firstDay = new Date(year, month, 1).getDay();
+                const daysInMonth = new Date(year, month + 1, 0).getDate();
+                    for (let i = 0; i < firstDay; i++) {
+                    const emptyDiv = document.createElement("div");
+                    daysDiv.appendChild(emptyDiv);
+                }
+    
+                for (let day = 1; day <= daysInMonth; day++) {
+                    const dayDiv = document.createElement("div");
+                    dayDiv.innerText = day;
+    
+                    if (day === today.getDate() && month === currentMonth && year === currentYear) {
+                        dayDiv.classList.add("today");
+                    }
+                    if (highlightedDates.some(date => date.year === year && date.month === month && date.day === day)) {
+                dayDiv.classList.add("highlight");
+            }
+
+                    daysDiv.appendChild(dayDiv);
+                }
+                monthDiv.appendChild(daysDiv);
+                calendarYearContainer.appendChild(monthDiv);
+            }
+        }
+        renderYearCalendar(currentYear);
+        yearSelect.addEventListener("change", () => {
+            renderYearCalendar(parseInt(yearSelect.value));
+        });
+    </script>
+</body> 
+</html>

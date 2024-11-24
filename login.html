@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #C5AAE9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .login-container {
+            background-color: #fff;
+            padding: 40px 50px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(57, 57, 57, 0.1);
+            height: 500px;
+            width: 400px;
+            position: relative;
+        }
+
+        .login-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .login-header img {
+            width: 50px;
+            height: 50px;
+            margin-right: 20px;
+        }
+
+        .login-container input[type="text"],
+        .login-container input[type="password"],
+        .login-container input[type="email"] {
+            width: 100%;
+            margin-left:5px ;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-right: #fff;
+            border-bottom: #fff;
+            border-top: #fff;
+        }
+
+        .login-container input[type="submit"] {
+            background-color: #C5AAE9;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .login-container input[type="submit"]:hover {
+            background-color: #a677e3;
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .forgot-password {
+            margin-top: 10px;
+            display: block;
+        }
+
+        .google-btn {
+            background-color:#C5AAE9;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .google-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            background-color: #C5AAE9;
+            padding: 5px;
+            border-radius: 50%;
+        }
+
+        .google-btn:hover {
+            background: #a677e3;
+        }
+
+        .btn-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .or-text {
+            margin: 10px 0;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .input-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 2px;
+        }
+        .input-container i {
+            font-size: x-large;
+            margin-right: 5px;
+            margin-left: 5px;
+            
+        }
+
+        .back-icon {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 20px;
+            color: #666;
+            cursor: pointer;
+        }
+        .input-container input::placeholder {
+            color: #aaa;
+        }
+        .input-container input {
+            border: none;
+            outline: none;
+            flex: 1;
+            padding: 5px;
+        }
+        .back-icon:hover {
+            color: #C5AAE9;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <!-- Back Icon -->
+        <a href="index.html" class="back-icon"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
+
+        <div class="login-header">
+            <img src="logo.png" alt="logo">
+            <h1>LOGIN</h1>
+        </div>
+        <form id="loginForm" method="POST">
+            <label for="email">Email</label>
+            <div class="input-container">
+                <i class="icon fa fa-envelope"></i>
+                <input type="email" id="email" name="email" required>            
+            </div>
+            <label for="password">Password</label>
+            <div class="input-container">
+                <i class="icon fa fa-lock"></i>
+                <input type="password" id="password" name="password" required> </div>
+            <div class="checkbox-container">
+                <input type="checkbox" id="stay-signed-in" name="stay-signed-in">
+                <label for="stay-signed-in">Stay signed in</label>&nbsp;&nbsp;
+            </div>
+            <a href="#" class="forgot-password">Forgot password?</a>
+            <div class="btn-container">
+                <input type="submit" value="Login">
+                <p class="or-text">----------------------------or-----------------------------</p>
+                <a href="month.html" style="text-decoration: none;"><button type="button" class="google-btn">
+                    <img class="google-icon" src="google.png" alt="Google Icon">
+                    Continue with Google
+                </button></a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            if (email && password) {
+                window.location.href = "month.html";
+            } else {
+                alert('Please enter a valid email and password.');
+            }
+        });
+    </script>
+</body>
+</html>

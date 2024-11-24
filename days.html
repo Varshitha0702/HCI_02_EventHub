@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Hub | Events Day-Wise, Week-Wise & Month-Wise</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        header {
+            background-color: #3f3f3f;
+            color: white;
+            padding: 20px;
+            border-bottom: 3px solid #e9bfd9;
+            display: flex;
+            justify-content: center; 
+            align-items: center;    
+            position: relative;   
+        }
+        header img {
+            width: 40px;
+            height: 40px;
+            margin-right: 15px;
+            vertical-align: middle;
+        }
+        header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin: 0;
+        }
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 24px;
+            color: white;
+            cursor: pointer;
+        }
+        .back-btn:hover {
+            color: white;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        .tabs a {
+            padding: 15px 25px;
+            margin: 0 10px;
+            background-color: #C5AAE9;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 18px;
+            text-align: center;
+            cursor: pointer;
+        }
+        .tabs a:hover {
+            background-color: #E9BFD9;
+        }
+        .section {
+            display: none;
+            margin-top: 30px;
+        }
+        .section.active {
+            display: block;
+        }
+        .event-card {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+        }
+        .event-card h3 {
+            margin: 0;
+            font-size: 20px;
+            color: rgb(128, 203, 128);
+        }
+        .event-card p {
+            color: #555;
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        .event-card .event-time {
+            font-size: 14px;
+            color: #888;
+        }
+        .event-card .event-location {
+            font-size: 14px;
+            color: #555;
+            margin-top: 10px;
+        }
+        .event-card .event-action {
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .event-action button {
+            background-color: #6053b7;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .event-action button:hover {
+            background-color: #E9BFD9;
+        }
+        footer {
+            background-color: #3f3f3f;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 14px;
+        }
+        footer a {
+            color: #E9BFD9;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <span class="back-btn" onclick="goBack()">
+            <a href="year.html"><i class="fas fa-arrow-left" style="color: white;"></i></a>
+        </span>
+        <img src="logo.png" alt="logo">
+        <p>View Events Day-Wise, Week-Wise, or Month-Wise</p>
+    </header>
+
+    <div class="container">
+        <div class="tabs">
+            <a href="javascript:void(0);" onclick="showSection('daywise')">Day-Wise Events</a>
+            <a href="javascript:void(0);" onclick="showSection('weekwise')">Week-Wise Events</a>
+            <a href="javascript:void(0);" onclick="showSection('monthwise')">Month-Wise Events</a>
+        </div>
+
+        <!-- Day-Wise Events Section -->
+        <div class="section daywise active" id="daywise">
+            <h2>Events for Today</h2>
+            <div class="event-card">
+                <h3>Tech Conference 2024</h3>
+                <p class="event-time">Date: 2024-11-20 | Time: 10:00 AM</p>
+                <p class="event-location">Location: Grand Hall, New York</p>
+                <p>Join us for the annual tech conference where we discuss the latest advancements in AI, IoT, and Blockchain.</p>
+                <div class="event-action">
+                    <button>Join Event</button>
+                    <button>Details</button>
+                </div>
+            </div>
+            <div class="event-card">
+                <h3>Marketing Workshop</h3>
+                <p class="event-time">Date: 2024-11-20 | Time: 2:00 PM</p>
+                <p class="event-location">Location: Downtown Conference Center</p>
+                <p>This workshop will cover the latest marketing trends and strategies for 2025.</p>
+                <div class="event-action">
+                    <button>Join Event</button>
+                    <button>Details</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Week-Wise Events Section -->
+        <div class="section weekwise" id="weekwise">
+            <h2>Events for This Week</h2>
+            <div class="event-card">
+                <h3>Annual Business Meetup</h3>
+                <p class="event-time">Date: 2024-11-18 to 2024-11-21 | Time: 9:00 AM</p>
+                <p class="event-location">Location: Riverside Hotel, California</p>
+                <p>This is a week-long meetup for professionals in the business industry to network, learn, and collaborate.</p>
+                <div class="event-action">
+                    <button>Join Event</button>
+                    <button>Details</button>
+                </div>
+            </div>
+            <div class="event-card">
+                <h3>Design Thinking Seminar</h3>
+                <p class="event-time">Date: 2024-11-22 | Time: 10:00 AM</p>
+                <p class="event-location">Location: Creative Hub, Los Angeles</p>
+                <p>Learn the basics of design thinking and how to apply it to solve complex problems in the workplace.</p>
+                <div class="event-action">
+                    <button>Join Event</button>
+                    <button>Details</button>
+                </div>
+            </div>
+            <div class="event-card">
+                <h3>Startup Networking Event</h3>
+                <p class="event-time">Date: 2024-11-24 | Time: 6:00 PM</p>
+                <p class="event-location">Location: Innovation Park, San Francisco</p>
+                <p>Join us for a networking event where startups and investors can meet and collaborate.</p>
+                <div class="event-action">
+                    <button>Join Event</button>
+                    <button>Details</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Month-Wise Events Section -->
+        <div class="section monthwise" id="monthwise">
+            <h2>Events for November 2024</h2>
+            <div class="event-card">
+                <h3>Product Launch Event</h3>
+                <p class="event-time">Date: 2024-11-05 | Time: 11:00 AM</p>
+                <p class="event-location">Location: Tech Expo Center, Boston</p>
+                <p>Launch event for the latest tech product revolutionizing the industry.</p>
+                <div class="event-action">
+                    <button>Join Event</button>
+                    <button>Details</button>
+                </div>
+            </div>
+            <div class="event-card">
+                <h3>AI Workshop</h3>
+                <p class="event-time">Date: 2024-11-10 | Time: 1:00 PM</p>
+                <p class="event-location">Location: Science Hub, San Francisco</p>
+                <p>An advanced workshop on artificial intelligence and machine learning.</p>
+                <div class="event-action">
+                    <button>Join Event</button>
+                    <button>Details</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Event Hub. All rights reserved.</p>
+        <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+    </footer>
+
+    <script>
+        function showSection(section) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(sec => {
+                sec.classList.remove('active');
+            });
+
+            // Show the selected section
+            const selectedSection = document.getElementById(section);
+            selectedSection.classList.add('active');
+        }
+
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Month | Event Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            position: fixed;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+        }
+        a {
+            text-decoration: none;
+        }
+        .top {
+            display: flex;
+            align-content: space-evenly;
+            font-size: xx-large;
+            align-items: center;
+        }
+        .middle {
+            display: flex;
+            align-items: flex-start;
+        }
+        .icon {
+            position: absolute;
+            left: 200px;
+            top: 7%;
+            transform: translateY(-50%);
+        }
+        .top input[type="text"] {
+            width: 20%;
+            padding: 10px 10px 10px 35px;
+            border-radius: 20px;
+            background-color: #97878712;
+            border-color: white;
+        }
+        .vertical {
+            color: black;
+            border: 1px solid #ECE9E9;
+            border-top: none;
+            border-left:none;
+            border-bottom: none;
+            flex-direction: column;
+            font-size: xx-large;
+            display: flex;
+            height: 580px;
+            width: 50px;
+            padding: 20px;
+            justify-content: space-between;
+            background-size: 20px 20px;
+        }
+        .mid {
+            height: 160px;
+            width: 1410px;
+            align-items: center;
+            box-shadow: 0px 0px 10px 4px rgba(75, 75, 75, 0.3);
+        }
+        .mid1 {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        table {
+            font-weight: 100;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: white;
+        }
+        .month-nav {
+            align-items: center;
+            display: flex;
+            justify-content: space-between;
+
+        }
+        .month-nav button {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            border: none;
+            background-color: white;
+        }
+        .today {
+
+            border-bottom: 5px solid #6095DA;
+            text-decoration: none;
+        }
+        .scroll-container {
+          height: calc(69vh - 80px); 
+            display: flex;
+            flex-direction: column;
+            overflow-x: auto;
+            width: 100%;
+            border-bottom: 2px solid #ccc;
+            padding: 20px 0;
+            position: relative;
+        }
+        .timeline-container {
+            border-bottom: 1.5px solid rgba(75, 75, 75, 0.3);
+            display: flex;
+            position: relative;
+            width: max-content;
+        }
+        .time-slot {
+            min-width: 300px;
+            text-align: center;
+            padding: 10px;
+            border-right: 1px solid #ffffff;
+            position: relative;
+        }
+        .events-container {
+            position: relative;
+            height: 500px;
+            width: 100px;
+            padding: 10px;
+        }
+        .event {
+            display: flex;
+            align-items: center; 
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 8px;
+            position: absolute;
+            white-space: nowrap;
+            transition: transform 0.2s ease;
+            height: 60px;
+        }
+        .event:hover
+         {
+            transform: scale(1.05);
+        }
+        .event i 
+        {
+            margin-right: 10px; 
+        } 
+        .add-event-button {
+            position: fixed;
+            bottom: 40px;
+            right: 20px;
+            width: 45px;
+            height: 45px;
+            background-color: #6DAAEF;
+            color: black;
+            border: none;
+            border-radius: 50%;
+            font-size: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+
+            background-color: white;
+            padding: 40px 50px;
+            border-radius: 15px;
+            width: 400px;
+            text-align: center;
+        }
+
+        .modal-header {
+            background-color: white;
+            color: #000000;
+            font-size:1.5em;
+            padding: 20px;
+        }
+
+        .modal-body {
+            background-color: #E9BFD9;
+            padding: 50px;
+            border-radius: 30px;
+            box-shadow: 0px 0px 10px 4px rgba(75, 75, 75, 0.3);
+
+        }
+
+        .modal-body input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #E9BFD9;
+            border-radius: 4px;
+        }
+        .top i{
+            transform:scale(1.05) ;
+
+        }
+        .modal-body button {
+          border-color: #E9BFD9;
+          background-color: #E9BFD9;
+          font-size:x-large;
+        }
+        .selected {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .selected-message {
+            margin-top: 20px;
+            font-size: large;
+        }
+        .set {
+                display: none;
+                position: fixed;
+                top: 270px;
+                left: 88px;
+                width: 19.7%;
+                height: 70%;
+                justify-content: center;
+                align-items: center;
+                border: 1px solid #ECE9E9;
+                z-index: 100;
+            }
+            .events {
+                background-color: white;
+                padding: 10px 50px;
+                width: 200px;
+            }
+            .switch {
+                position: relative;
+                display: inline-block;
+                width: 42px;
+                height: 24px;
+            }
+            .switch input {
+                opacity: 0;
+                width: 0;
+                height: 0;
+            }
+            .slider {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: #ccc;
+                border-radius: 34px;
+            }
+            .rem {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                padding: 5px 10px;
+            }
+            .slider:before {
+                position: absolute;
+                content: "";
+                height: 16px;
+                width: 16px;
+                left: 4px;
+                bottom: 4px;
+                background-color: white;
+                border-radius: 50%;
+                transition: 0.4s;
+            }
+            .item {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+            input:checked + .slider {
+                background-color: #34C759;
+            }
+            input:checked + .slider:before {
+                transform: translateX(18px);
+            }
+            .reminderButton{
+                background-color: white;
+                margin-right: 45px;
+                border: none;
+                font-size: xx-large;
+                cursor: pointer;
+            }
+            .vertical :hover{
+                color: black;
+                transform:scale(1.05) ;
+            }
+            .fa-solid.fa-circle-check {
+                  font-size: 30px;
+                }
+                .vertical i{
+                     color: black;
+                }
+    </style>
+    </head>
+<body>
+    <div class="top">
+        <img style="margin: 30px; margin-left: 20px; margin-right: 40px;" src="logo.png" alt="logo" width="40" height="40">
+        <a href="month.html"><i class="fa-solid fa-house" style="margin-right: 50px;color: black;"></i></a>
+        <span class="icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+        <input type="text" placeholder="       Search Event/Date/Month" style="margin-right: 750px;">
+        Hello John,
+    </div>
+    <div class="middle">
+        <div class="vertical">
+            <i class="fa-solid fa-rotate-right"></i>
+            <button class="reminderButton" onclick="openremainder()"><i class="fa-regular fa-bell"></i></i></button>
+            <a href="settings.html"><i class="fa-solid fa-gear"></i></a>
+            <a href="help.html"><i class="fa-solid fa-question"></i></a>
+            <a href="profile.html"><i class="fa-solid fa-circle-user"></i></a>
+        </div>
+        <div class="mid">
+            
+            <div class="mid2">
+                <div class="month-nav">
+                    <button onclick="previousMonth()" style="font-size: large; color: black;margin-left: 20px;margin-right: 480px;"><i class="fa-solid fa-chevron-left"></i> <span id="prev"></span> </button>
+                    <div style="display: flex;cursor: pointer;"><h2 id="month" style="margin-right: 10px; color: black;"></h2>
+                    <h2 id="year" style="margin-right: 440px;color: #A9B7D0;"></h2></div>
+                    <button onclick="nextMonth()" style="font-size: large; color: black;margin-right: 10px;"><span id="next"></span>  <i class="fa-solid fa-chevron-right"></i></button>
+                </div>
+                <table id="calendar">
+                    <thead>
+                        <tr>
+                            <td>M</td><td>T</td><td>W</td><td>T</td><td>F</td><td>S</td><td>S</td>
+                            <td>M</td><td>T</td><td>W</td><td>T</td><td>F</td><td>S</td><td>S</td>
+                            <td>M</td><td>T</td><td>W</td><td>T</td><td>F</td><td>S</td><td>S</td>
+                            <td>M</td><td>T</td><td>W</td><td>T</td><td>F</td><td>S</td><td>S</td>
+                            <td>M</td><td>T</td><td>W</td><td>T</td><td>F</td><td>S</td><td>S</td>
+                            <td>M</td><td>T</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                    </div>
+                </table>
+                <div class="selected-message" id="selected-message">
+             <div class="scroll-container">
+                
+        <div class="timeline-container" id="timeline">
+            <div>
+                <div class="set" id="set">
+                    <div class="events">
+                    <h1>Calendar</h1>  
+
+                        <div class="rem">
+                            <div class="item">
+                                <i class="fa-solid fa-square-check"></i>
+                                <label>Pooja's B'day</label>
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                            <div class="item">
+                                <i class="fa-solid fa-square-check"></i>
+                                <label>Exercise</label>
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                            <div class="item">
+                                <i class="fa-solid fa-square-check"></i>
+                                <label>Sports Club</label>
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                            <div class="item">
+                                <i class="fa-solid fa-square-check"></i>
+                                <label>HCI Project</label>
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                            <div class="item">
+                                <i class="fa-solid fa-square-check"></i>
+                                <label>Meeting</label>
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="time-slot">12 AM</div>
+            <div class="time-slot">1 AM</div>
+            <div class="time-slot">2 AM</div>
+            <div class="time-slot">3 AM</div>
+            <div class="time-slot">4 AM</div>
+            <div class="time-slot">5 AM</div>
+            <div class="time-slot">6 AM</div>
+            <div class="time-slot">7 AM</div>
+            <div class="time-slot">8 AM</div>
+            <div class="time-slot">9 AM</div>
+            <div class="time-slot">10 AM</div>
+            <div class="time-slot">11 AM</div>
+            <div class="time-slot">12 PM</div>
+            <div class="time-slot">1 PM</div>
+            <div class="time-slot">2 PM</div>
+            <div class="time-slot">3 PM</div>
+            <div class="time-slot">4 PM</div>
+            <div class="time-slot">5 PM</div>
+            <div class="time-slot">6 PM</div>
+            <div class="time-slot">7 PM</div>
+            <div class="time-slot">8 PM</div>
+            <div class="time-slot">9 PM</div>
+            <div class="time-slot">10 PM</div>
+            <div class="time-slot">11 PM</div>
+        </div>
+        <br>
+        <div class="events-container" id="events">
+        </div>
+        <button class="add-event-button" onclick="openModal()">+</button>
+    </div>
+</div>
+    <div id="eventModal" class="modal">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                My Events
+            </div>
+            <br>
+            <div class="modal-body">
+                <ul>
+                    <li><input type="text" id="eventDescription" placeholder="Title" style="background-color: #E9BFD9;"/> </li>
+                  <li><input type="text" id="eventTime" placeholder="Time  (e.g., '1 AM')" style="background-color: #E9BFD9;"/> </li>
+                </ul>
+                <button onclick="addEvent()"><i class="fa-solid fa-square-check"></i></button>
+                <button onclick="closeModal()"><i class="fa-solid fa-square-xmark"></i></button>
+            </div>
+        </div>
+    </div>
+            </div>
+        </div>
+    </div>
+    <script src="month.js"></script>
+</body>
+</html>
